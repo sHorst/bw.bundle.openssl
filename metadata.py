@@ -1,9 +1,8 @@
-@metadata_processor
-def add_apt_packages(metadata):
-    if node.has_bundle("apt"):
-        metadata.setdefault('apt', {})
-        metadata['apt'].setdefault('packages', {})
+defaults = {}
 
-        metadata['apt']['packages']['ca-certificates'] = {'installed': True}
-
-    return metadata, DONE
+if node.has_bundle("apt"):
+    defaults['apt'] = {
+        'packages': {
+            'ca-certificates': {'installed': True}
+        }
+    }
